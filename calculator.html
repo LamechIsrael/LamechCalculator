@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Calculator</title>
+</head>
+
+<body>
+
+    <input type="text" oninput="getFirstNumberInput(event)">
+    <input type="text" oninput="getSeocndNumberInput(event)">
+
+    <button onclick="addNumbers()">Add</button>
+    <button onclick="subtractNumbers()">Subtract</button>
+    <button onclick="multiplyNumbers()">Multiply</button>
+    <button onclick="divideNumbers()">Divide</button>
+
+    <ul id=history>
+        <li>"Welcom To Lamech's Calculator"</li>
+        <li>"Please enter in the numbers you wish to calculate."</li>
+
+    </ul>
+
+</body>
+
+<script>
+    // state
+    const equations = [];
+    let num1 = "";
+    let num2 = "";
+
+
+    // Event Handlers
+    function getFirstNumberInput(event) {
+        num1 = parseInt(event.target.value);
+    }
+
+    function getSeocndNumberInput(event) {
+        num2 = parseInt(event.target.value);
+    }
+
+    //Addition
+    function addNumbers(event) {
+        const sign = "+"
+        const solution = num1 + num2;
+        const total = { firstNum: num1, secondNum: num2, equals: solution, movement: sign }
+        equations.push(total)
+        renderEquationList();
+    }
+
+    //Subtraction
+    function subtractNumbers(event) {
+        const sign = "-"
+        const solution = num1 - num2;
+        const total = { firstNum: num1, secondNum: num2, equals: solution, movement: sign }
+        equations.push(total)
+        renderEquationList();
+    }
+
+    //Multiplication
+    function multiplyNumbers(event) {
+        const sign = "*"
+        const solution = num1 * num2;
+        const total = { firstNum: num1, secondNum: num2, equals: solution, movement: sign }
+        equations.push(total)
+        renderEquationList();
+    }
+
+    //Division
+    function divideNumbers(event) {
+        const sign = "/"
+        const solution = num1 / num2;
+        const total = { firstNum: num1, secondNum: num2, equals: solution, movement: sign }
+        equations.push(total)
+        renderEquationList();
+    }
+
+    // Rerenderer
+    function renderEquationList() {
+        const equationListElement = document.getElementById("history");
+        const listHTML = equations.map(t => `<li>${t.firstNum} ${t.movement} ${t.secondNum} = ${t.equals}</li>`).join("");
+        equationListElement.innerHTML = listHTML;
+    }
+
+
+
+
+
+</script>
+
+</html>
